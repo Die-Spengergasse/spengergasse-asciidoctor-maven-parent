@@ -33,10 +33,11 @@ jobs:
           distribution: 'temurin'
           cache: maven
           server-id: github
+      # maybe this information helps... https://github.com/actions/checkout?tab=readme-ov-file#push-a-commit-using-the-built-in-token
       - name: Configure Git user
         run: |
-          git config user.email "actions@github.com"
-          git config user.name "GitHub Actions"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
       - name: Release with Maven
         run: |
           ./mvnw \
