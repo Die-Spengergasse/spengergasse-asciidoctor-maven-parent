@@ -9,6 +9,46 @@
     <version>1.0.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
+    <name>Maven Parent for Asciidoctor projects</name>
+    <description>Maven Parent for Asciidoctor projects</description>
+    <url>https://github.com/Die-Spengergasse/spengergasse-asciidoctor-maven-parent</url>
+
+    <issueManagement>
+        <system>GitHub Issues</system>
+        <url>https://github.com/Die-Spengergasse/spengergasse-asciidoctor-maven-parent/issuess</url>
+    </issueManagement>
+
+    <licenses>
+        <license>
+            <name>MIT License</name>
+            <url>https://www.opensource.org/licenses/mit-license.php</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <scm>
+        <url>https://github.com/Die-Spengergasse/spengergasse-asciidoctor-maven-parent</url>
+        <connection>scm:git:git://github.com/Die-Spengergasse/spengergasse-asciidoctor-maven-parent.git</connection>
+        <developerConnection>scm:git:git@github.com:Die-Spengergasse/spengergasse-asciidoctor-maven-parent.git
+        </developerConnection>
+        <tag>HEAD</tag>
+    </scm>
+
+    <developers>
+        <developer>
+            <id>grueneis</id>
+            <name>Joachim Grüneis</name>
+            <email>grueneis@spengergasse.at</email>
+            <url>https://github.com/grueneis-spengergasse</url>
+        </developer>
+        <developer>
+            <id>unger</id>
+            <name>Klaus Unger</name>
+            <email>unger@spengergasse.at</email>
+            <url>https://github.com/KUnger-Spg</url>
+        </developer>
+    </developers>
+
     <properties>
         <java.version>23</java.version>
 
