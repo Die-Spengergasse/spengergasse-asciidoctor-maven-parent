@@ -34,7 +34,7 @@
         <asciidoctorj-pdf.version>2.3.18</asciidoctorj-pdf.version>
         <revealjs.version>4.6.1</revealjs.version>
 
-<!--        <asciidoctorOutDirectory>${project.build.directory}/asciidoc</asciidoctorOutDirectory>-->
+        <asciidoctorOutDirectory>${project.build.directory}/asciidoc</asciidoctorOutDirectory>
     </properties>
 
     <build>
@@ -119,6 +119,7 @@
                         </goals>
                         <configuration>
                             <backend>revealjs</backend>
+                            <outputDirectory>${asciidoctorOutDirectory}/slides</outputDirectory>
                             <requires>
                                 <require>asciidoctor-revealjs</require>
                                 <require>asciidoctor-diagram</require>
