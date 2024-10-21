@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>at.spengergasse</groupId>
+    <artifactId>spengergasse-asciidoctor-maven-parent</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <properties>
+        <java.version>23</java.version>
+
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
+        <maven.compiler.release>${java.version}</maven.compiler.release>
+
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <!--
+             asciidoctor and friends for document generation
+             https://github.com/asciidoctor/asciidoctor-maven-plugin
+             https://github.com/asciidoctor/asciidoctorj
+             https://github.com/asciidoctor/asciidoctor-diagram
+             https://github.com/asciidoctor/asciidoctor-reveal.js
+             https://github.com/asciidoctor/asciidoctor-pdf
+         -->
+        <asciidoctor-maven-plugin.version>3.0.0</asciidoctor-maven-plugin.version>
+        <asciidoctorj.version>3.0.0</asciidoctorj.version>
+        <asciidoctorj-chart.version>1.0.0</asciidoctorj-chart.version>
+        <asciidoctorj-revealjs.version>5.1.0</asciidoctorj-revealjs.version>
+        <asciidoctorj-diagram.version>2.3.1</asciidoctorj-diagram.version>
+        <asciidoctorj-pdf.version>2.3.18</asciidoctorj-pdf.version>
+        <revealjs.version>4.6.1</revealjs.version>
+
+<!--        <asciidoctorOutDirectory>${project.build.directory}/asciidoc</asciidoctorOutDirectory>-->
+    </properties>
+
+    <build>
+        <defaultGoal>process-resources</defaultGoal>
+        <plugins>
+            <plugin>
+                <groupId>org.asciidoctor</groupId>
+                <artifactId>asciidoctor-maven-plugin</artifactId>
+                <version>${asciidoctor-maven-plugin.version}</version>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.asciidoctor</groupId>
+                        <artifactId>asciidoctorj</artifactId>
+                        <version>${asciidoctorj.version}</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>org.asciidoctor</groupId>
+                        <artifactId>asciidoctorj-diagram</artifactId>
+                        <version>${asciidoctorj-diagram.version}</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>org.asciidoctor</groupId>
+                        <artifactId>asciidoctorj-pdf</artifactId>
+                        <version>${asciidoctorj-pdf.version}</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>org.asciidoctor</groupId>
+                        <artifactId>asciidoctorj-chart</artifactId>
+                        <version>${asciidoctorj-chart.version}</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>org.asciidoctor</groupId>
+                        <artifactId>asciidoctorj-revealjs</artifactId>
+                        <version>${asciidoctorj-revealjs.version}</version>
+                    </dependency>
+                </dependencies>
+                <configuration>
+                    <sourceDirectory>src/main/asciidoc</sourceDirectory>
+                    <requires>
+                        <require>asciidoctor-diagram</require>
+                        <require>asciidoctor-chart</require>
+                        <require>asciidoctor-revealjs</require>
+                        <require>asciidoctor-pdf</require>
+                    </requires>
+                    <attributes>
+                        <sourcedir>${project.build.sourceDirectory}</sourcedir>
+                        <project-version>${project.version}</project-version>
+                    </attributes>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>generate-pdf-book</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>process-asciidoc</goal>
+                        </goals>
+                        <configuration>
+                            <doctype>book</doctype>
+                            <backend>pdf</backend>
+                            <outputDirectory>${asciidoctorOutDirectory}/pdf</outputDirectory>
+                            <enableVerbose>true</enableVerbose>
+                            <attributes>
+                                <icons>font</icons>
+                                <pagenums/>
+                                <toc/>
+                                <idprefix/>
+                                <idseparator>-</idseparator>
+                                <!-- <imagesdir>${project.basedir}/src/main/images</imagesdir>-->
+                                <!-- <imagesoutdir>${asciidoctorOutDirectory}/images</imagesoutdir>-->
+                                <!-- <pdf-fontsdir>${project.basedir}/src/main/fonts</pdf-fontsdir>-->
+                                <!-- <pdf-themesdir>${project.basedir}/src/main/themes/pdf</pdf-themesdir>-->
+                                <!-- <pdf-theme>spengergasse</pdf-theme>-->
+                                <source-highlighter>coderay</source-highlighter>
+                            </attributes>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>generate-revealjs</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>process-asciidoc</goal>
+                        </goals>
+                        <configuration>
+                            <backend>revealjs</backend>
+                            <requires>
+                                <require>asciidoctor-revealjs</require>
+                                <require>asciidoctor-diagram</require>
+                                <require>asciidoctor-pdf</require>
+                            </requires>
+                            <attributes>
+                                <revealjsdir>
+                                    https://cdn.jsdelivr.net/npm/reveal.js@${revealjs.version}
+                                </revealjsdir>
+                                <source-highlighter>rouge</source-highlighter>
+                                <imagesdir>./images</imagesdir>
+                                <toc>left</toc>
+                                <icons>font</icons>
+                                <sectanchors>true</sectanchors>
+                                <!-- set the idprefix to blank -->
+                                <idprefix/>
+                                <idseparator>-</idseparator>
+                                <docinfo1>true</docinfo1>
+                            </attributes>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+        <extensions>
+            <extension>
+                <groupId>org.apache.maven.extensions</groupId>
+                <artifactId>maven-build-cache-extension</artifactId>
+                <version>1.0.0</version>
+            </extension>
+        </extensions>
+    </build>
+</project>
