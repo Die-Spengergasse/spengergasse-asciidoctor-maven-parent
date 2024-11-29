@@ -34,6 +34,14 @@
         <tag>HEAD</tag>
     </scm>
 
+    <distributionManagement>
+        <repository>
+            <id>github</id>
+            <name>GitHub Packages</name>
+            <url>https://maven.pkg.github.com/Die-Spengergasse/spengergasse-asciidoctor-maven-parent</url>
+        </repository>
+    </distributionManagement>
+
     <developers>
         <developer>
             <id>grueneis</id>
