@@ -79,7 +79,7 @@
         <asciidoctorj-chart.version>1.0.0</asciidoctorj-chart.version>
         <asciidoctorj-revealjs.version>5.2.0</asciidoctorj-revealjs.version>
         <asciidoctorj-diagram.version>3.0.1</asciidoctorj-diagram.version>
-        <asciidoctorj-pdf.version>2.3.20</asciidoctorj-pdf.version>
+        <asciidoctorj-pdf.version>2.3.23</asciidoctorj-pdf.version>
         <revealjs.version>4.6.1</revealjs.version>
 
         <asciidoctorOutDirectory>${project.build.directory}/asciidoc</asciidoctorOutDirectory>
